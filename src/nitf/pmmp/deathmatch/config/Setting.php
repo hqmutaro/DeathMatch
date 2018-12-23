@@ -14,11 +14,12 @@ class Setting{
         self::$config = new Config($plugin->getDataFolder() . 'config.yml', Config::YAML, [
            'enable-arena' => [
                'world',
-           ]
+           ],
+           'matching-time' => 60
         ]);
     }
 
-    public static function get(string $key, bool $default = false): string{
-        return self::$config->get($key, $default);
+    public static function getConfig(): Config{
+        return self::$config;
     }
 }

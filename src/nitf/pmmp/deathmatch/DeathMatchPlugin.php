@@ -18,6 +18,7 @@ class DeathMatchPlugin extends PluginBase{
     }
 
     protected function onEnable(): void{
+        TaskManager::repeatingTask(new PrepareArenaTask(), 20 * 1);
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{

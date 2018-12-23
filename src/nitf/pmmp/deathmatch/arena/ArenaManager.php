@@ -16,7 +16,7 @@ class ArenaManager{
     }
 
     public static function getRandArena(): ?Arena{
-        foreach (Setting::get('enable-arena') as $arena_name){
+        foreach (Setting::getConfig()->get('enable-arena') as $arena_name){
             if (isset(self::$arenas[$arena_name])){
                 continue;
             }

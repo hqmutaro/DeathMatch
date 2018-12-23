@@ -5,6 +5,7 @@ namespace nitf\pmmp\deathmatch\arena;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\Config;
 use nitf\pmmp\deathmatch\team\Team;
+use nitf\pmmp\deathmatch\team\TeamManager;
 
 class Arena{
 
@@ -39,7 +40,6 @@ class Arena{
             ]
         ];
         $this->createConfig($team_settings);
-
         TeamManager::register(new Team($this));
     }
 
@@ -58,8 +58,8 @@ class Arena{
         $this->setting = $arena_config;
     }
     
-    public function getConfig(string $key, bool $default = false){
-        return $this->setting->get($key, $default);
+    public function getConfig(): Config{
+        return $this->setting;
     }
 
     public function getName(): string{
