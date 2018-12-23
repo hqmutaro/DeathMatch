@@ -12,10 +12,12 @@ class DeathMatchPlugin extends PluginBase{
     private const VERSION = '0.1';
     private const API_VERSION = '3.0.0';
 
-    private static $instance = null;
-
     protected function onLoad(): void{
-        self::$instance = $this;
+        Arena::init($this);
+        Setting::init($this);
+    }
+
+    protected function onEnable(): void{
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
@@ -24,9 +26,5 @@ class DeathMatchPlugin extends PluginBase{
             return true;
         }
         return false;
-    }
-
-    public static function getInstance(): ?self{
-        return self::$instance;
     }
 }
