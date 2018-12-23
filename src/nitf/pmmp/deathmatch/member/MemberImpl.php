@@ -28,7 +28,7 @@ class MemberImpl implements Member{
         }
         $team = TeamManager::get($game->getName());
         $team_name = $team->matching();
-        if (empty($team)){
+        if (empty($team_name)){
             $this->player->sendMessage("現在マッチング中のチームが存在しません");
             MemberRepository::unregister($this->player);
             return;
