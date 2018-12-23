@@ -32,7 +32,7 @@ class MatchingTask extends Task{
             $this->getHandler()->cancel();
             return;
         }
-        if ($this->game->isFullMember()){
+        if ($this->game->getTeam()->isFullMember()){
             $this->game->start();
             $this->getHandler()->cancel();
             return;
