@@ -1,6 +1,6 @@
 <?php
 
-namespace nitf\pmmp\deathmatch;
+namespace nitf\pmmp\deathmatch\config;
 
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\Config;

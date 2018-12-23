@@ -6,7 +6,7 @@ use pocketmine\scheduler\Task;
 use nitf\pmmp\deathmatch\TaskManager;
 use nitf\pmmp\deathmatch\arena\ArenaManager;
 
-class PrepareArena extends Task{
+class PrepareArenaTask extends Task{
 
     public function onRun(int $tick): void{
         $arena = ArenaManager::getRandArena();

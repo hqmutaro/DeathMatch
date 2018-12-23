@@ -5,7 +5,10 @@ namespace nitf\pmmp\deathmatch;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
-use nitf\pmmp\member\MemberRepository;
+use nitf\pmmp\deathmatch\arena\Arena;
+use nitf\pmmp\deathmatch\config\Setting;
+use nitf\pmmp\deathmatch\member\MemberRepository;
+use nitf\pmmp\deathmatch\game\PrepareArenaTask;
 
 class DeathMatchPlugin extends PluginBase{
 

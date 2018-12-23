@@ -14,11 +14,11 @@ class TaskManager{
         self::$plugin = $plugin;
     }
 
-    public static function repeatingTask(Task $task, int $period): TaskHandler{
-        return self::$plugin->scheduleRepeatingTask($task, $period);
+    public static function repeatingTask(Task $task, int $period){
+        self::$plugin->scheduleRepeatingTask($task, $period);
     }
 
-    public static function delayedTask(Task $task, int $delay): TaskHandler{
-        return self::$plugin->scheduleRepeatingTask($task, $delay);
+    public static function delayedTask(Task $task, int $delay){
+        self::$plugin->scheduleRepeatingTask($task, $delay);
     }
 }
