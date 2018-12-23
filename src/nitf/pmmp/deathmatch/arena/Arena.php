@@ -59,7 +59,7 @@ class Arena{
     }
     
     public function getConfig(string $key, bool $default = false){
-        return $this->settings->get($key, $default);
+        return $this->setting->get($key, $default);
     }
 
     public function getName(): string{
