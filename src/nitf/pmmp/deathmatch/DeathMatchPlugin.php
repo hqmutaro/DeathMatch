@@ -18,9 +18,17 @@ class DeathMatchPlugin extends PluginBase{
     protected function onLoad(): void{
         Arena::init($this);
         Setting::init($this);
+        TaskManager::init($this);
     }
 
     protected function onEnable(): void{
+        $path = $this->getDataFolder();
+        if (!file_exists($path)){
+            @mkdir($path);
+        }
+        if(!is_dir($dir = $path . 'arenas/')){
+            @mkdir($dir);
+        }
         TaskManager::repeatingTask(new PrepareArenaTask(), 20 * 1);
     }
 

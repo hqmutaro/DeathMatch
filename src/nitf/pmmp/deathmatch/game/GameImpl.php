@@ -2,6 +2,10 @@
 
 namespace nitf\pmmp\deathmatch\game;
 
+use nitf\pmmp\deathmatch\arena\Arena;
+use nitf\pmmp\deathmatch\team\Team;
+use nitf\pmmp\deathmatch\team\TeamManager;
+
 class GameImpl implements Game{
 
     /** @var Arena $arena */
@@ -12,7 +16,7 @@ class GameImpl implements Game{
 
     private $is_started = false;
 
-    public function __construct(Area $area){
+    public function __construct(Arena $arena){
         $this->arena = $arena;
         $this->team = TeamManager::get($arena->getName());
     }
@@ -22,6 +26,7 @@ class GameImpl implements Game{
     }
 
     public function finish(): void{
+        $this->is_started = false;
     }
 
     public function isStarted(): bool{

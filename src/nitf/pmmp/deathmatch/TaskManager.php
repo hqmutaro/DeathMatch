@@ -10,15 +10,15 @@ class TaskManager{
     /** @var DeathMatchPlugin $plugin */
     private static $plugin;
 
-    public static function init(DeathMatchTask $plugin): void{
+    public static function init(DeathMatchPlugin $plugin): void{
         self::$plugin = $plugin;
     }
 
-    public static function repeatingTask(Task $task, int $period){
-        self::$plugin->scheduleRepeatingTask($task, $period);
+    public static function repeatingTask(Task $task, int $period): ?TaskHandler{
+        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, $period);
     }
 
-    public static function delayedTask(Task $task, int $delay){
-        self::$plugin->scheduleRepeatingTask($task, $delay);
+    public static function delayedTask(Task $task, int $delay): ?TaskHandler{
+        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, $delay);
     }
 }

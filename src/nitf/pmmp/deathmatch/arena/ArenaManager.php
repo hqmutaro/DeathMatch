@@ -1,6 +1,8 @@
 <?php
 
-namespace nitf\pmmp\deathmatch;
+namespace nitf\pmmp\deathmatch\arena;
+
+use nitf\pmmp\deathmatch\config\Setting;
 
 class ArenaManager{
 
