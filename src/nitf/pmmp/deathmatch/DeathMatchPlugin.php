@@ -16,6 +16,7 @@ class DeathMatchPlugin extends PluginBase{
     private const API_VERSION = '3.0.0';
 
     protected function onLoad(): void{
+        Messenger::init($this);
         Arena::init($this);
         Setting::init($this);
         TaskManager::init($this);
