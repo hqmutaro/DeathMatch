@@ -6,6 +6,8 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use nitf\pmmp\deathmatch\arena\Arena;
+use nitf\pmmp\deathmatch\event\DamageEvent;
+use nitf\pmmp\deathmatch\event\DeathEvent;
 use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\member\MemberRepository;
 use nitf\pmmp\deathmatch\game\PrepareArenaTask;
@@ -31,6 +33,8 @@ class DeathMatchPlugin extends PluginBase{
             @mkdir($dir);
         }
         TaskManager::repeatingTask(new PrepareArenaTask(), 20 * 1);
+        $this->getServer()->getPluginManager()->registerEvents(new DamageEvent(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new DeathEvent(), $this);
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
