@@ -40,4 +40,8 @@ class GameImpl implements Game{
     public function getName(): string{
         return $this->arena->getName();
     }
+
+    public function getArena(): Arena{
+        return $this->arena;
+    }
 }

@@ -1,5 +1,9 @@
 <?php
 
+namespace nitf\pmmp\deathmatch\member;
+
+use pocketmine\Player;
+
 class MemberRepository{
 
     private static $members = [];
@@ -13,6 +17,10 @@ class MemberRepository{
 
     public static function unregister(Player $player): void{
         unset(self::$members[$player->getName()]);
+    }
+
+    public static function isMember(Player $player): bool{
+        return (!empty(self::$members[$player->getName()]));
     }
 
     public static function register(Player $player): void{
