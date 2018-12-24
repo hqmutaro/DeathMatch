@@ -2,6 +2,6 @@ name: DeathMatch
 main: nitf\pmmp\deathmatch\DeathMatchPlugin
 author: 2tf
 api: [3.0.0]
-version: 0.1
+version: 1.0
 description: "PocketMine-MP Plugin"
 website: https://github.com/nitf/DeathMatch

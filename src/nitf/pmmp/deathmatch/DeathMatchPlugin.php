@@ -12,7 +12,7 @@ use nitf\pmmp\deathmatch\game\PrepareArenaTask;
 
 class DeathMatchPlugin extends PluginBase{
 
-    private const VERSION = '0.2';
+    private const VERSION = '1.0';
     private const API_VERSION = '3.0.0';
 
     protected function onLoad(): void{
