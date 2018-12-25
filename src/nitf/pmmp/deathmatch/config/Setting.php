@@ -15,7 +15,13 @@ class Setting{
            'enable-arena' => [
                'world',
            ],
-           'matching-time' => 60
+           'matching-time' => 60,
+           'lobby' => [
+               'x' => 0,
+               'y' => 0,
+               'z' => 0,
+               'level' => 'world'
+           ]
         ]);
     }
 

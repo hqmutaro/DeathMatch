@@ -3,6 +3,7 @@
 namespace nitf\pmmp\deathmatch\team;
 
 use nitf\pmmp\deathmatch\arena\Arena;
+use nitf\pmmp\deathmatch\member\Member;
 
 class Team{
 
@@ -22,6 +23,10 @@ class Team{
 
     public function addMember(string $team_name, Member $member): void{
         $this->teams[$team_name] = $member->getName();
+    }
+
+    public function getMember(string $team_name, stirng $name): ?Member{
+        return $this->teams[$team_name][$name];
     }
 
     public function getTeamMembers(string $team): array{

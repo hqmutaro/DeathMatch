@@ -62,8 +62,27 @@ class MemberImpl implements Member{
         return $this->death;
     }
 
+    public function spawnToLobby(): void{
+        $spawn_pos = Setting::getConfig()->get('lobby');
+        $this->player->teleport(new Position($spawn_pos['x'], $spawn_pos['y'], $spawn_pos['z'], $spawn_pos['level']);
+    }
+
     public function respawn(): void{
-        $spawn_pos = $this->getTeamSetting()['spawn-pos'];
+        $team_settings = $this->getTeamSetting();
+        $inventory = $this->player->getInventory();
+        foreach ($team_settings['weapon'] as $weapon){
+            $item_id = explode(':', $weapon);
+            $id = (int) $item_id[0];
+            $meta = (int) $item_id[1];
+            $inventory->addItem(Item::get($id, $meta, 1));
+        }
+        $armors = $team_settings['armor'];
+        $armor_inventory = $player->getArmorInventory();
+        $armor_inventory->setHelmet(Item::get($armor['helmet'], 0, 1));
+        $armor_inventory->setChestplate(Item::get($armor['chestplate'], 0, 1));
+        $armor_inventory->setLeggings(Item::get($armor['leggings'], 0, 1));
+        $armor_inventory->setBoots(Item::get($armor['boots'], 0, 1));
+        $spawn_pos = $team_settings['spawn-pos'];
         $this->player->teleport(new Position($spawn_pos['x'], $spawn_pos['y'], $spawn_pos['z'], $this->getArena()->getName()));
     }
 

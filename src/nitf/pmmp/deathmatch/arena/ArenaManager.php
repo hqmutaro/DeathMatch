@@ -17,6 +17,10 @@ class ArenaManager{
         self::$arenas[$arena->getName()] = $arena;
     }
 
+    public static function ungister(Arena $arena): void{
+        unset(self::$arenas[$arena->getName()]);
+    }
+
     public static function getRandArena(): ?Arena{
         foreach (Setting::getConfig()->get('enable-arena') as $arena_name){
             if (isset(self::$arenas[$arena_name])){
