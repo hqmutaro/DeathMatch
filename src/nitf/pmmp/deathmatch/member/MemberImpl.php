@@ -4,6 +4,7 @@ namespace nitf\pmmp\deathmatch\member;
 
 use pocketmine\Player;
 use pocketmine\level\Position;
+use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\team\TeamManager;
 use nitf\pmmp\deathmatch\game\GameManager;
 
@@ -70,6 +71,7 @@ class MemberImpl implements Member{
     public function respawn(): void{
         $team_settings = $this->getTeamSetting();
         $inventory = $this->player->getInventory();
+        $inventory->clearAll();
         foreach ($team_settings['weapon'] as $weapon){
             $item_id = explode(':', $weapon);
             $id = (int) $item_id[0];

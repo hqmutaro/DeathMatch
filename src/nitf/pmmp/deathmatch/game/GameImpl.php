@@ -3,6 +3,7 @@
 namespace nitf\pmmp\deathmatch\game;
 
 use pocketmine\item\Item;
+use nitf\pmmp\deathmatch\TaskManager;
 use nitf\pmmp\deathmatch\arena\Arena;
 use nitf\pmmp\deathmatch\team\Team;
 use nitf\pmmp\deathmatch\team\TeamManager;
@@ -24,11 +25,13 @@ class GameImpl implements Game{
 
     public function start(): void{
         $this->is_started = true;
+        TaskManager::repeatingTask(new TimeCountTask($this, $this->arena->getConfig()['time-limit']));
         foreach ($this->team->getTeams() as $team_name => $player_names){
             $team_settings = $this->arena->getConfig()['team'][$team_name];
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
                 $player = $member->getPlayer();
+                $player->getInventory()->clearAll();
                 $player->setNameTag(str_replace('%NAME%', $player->getName(), $team_settings['name-tag']));
                 $player->setDisplayName(str_replace('%NAME%', $player->getName(), $team_settings['display-tag']));
                 $member->respawn();
@@ -43,6 +46,7 @@ class GameImpl implements Game{
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
                 $player = $member->getPlayer();
+                $player->getInventory()->clearAll();
                 $player->setNameTag($player->getName());
                 $player->setDisplayName($player->getName());
                 $member->spawnToLobby();
