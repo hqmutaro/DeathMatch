@@ -27,4 +27,3 @@ class MemberRepository{
         self::$members[$player->getName()] = new MemberImpl($player);
     }
 }
-

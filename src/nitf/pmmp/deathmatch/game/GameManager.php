@@ -19,6 +19,10 @@ class GameManager{
         return self::$games[$name];
     }
 
+    public static function getAll(): ?array{
+        return self::$games;
+    }
+
     public static function matching(?string $game_name): ?Game{
         if (empty($game_name)){
             foreach (self::$games as $game){

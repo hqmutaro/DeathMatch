@@ -13,6 +13,10 @@ class ArenaManager{
         return self::$arenas[$arena_name];
     }
 
+    public static function getAll(): ?array{
+        return self::$arenas;
+    }
+
     public static function register(Arena $arena): void{
         self::$arenas[$arena->getName()] = $arena;
     }

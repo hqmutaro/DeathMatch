@@ -21,7 +21,8 @@ class Setting{
                'y' => 0,
                'z' => 0,
                'level' => 'world'
-           ]
+           ],
+           'auto-setting' => true
         ]);
     }
 

@@ -29,6 +29,10 @@ class Team{
         return $this->teams[$team_name][$name];
     }
 
+    public function removeMember(string $team_name, Member $member): void{
+        unset($this->teams[$team_name][$member->getName()]);
+    }
+
     public function getTeamMembers(string $team): array{
         return $this->teams[$team];
     }

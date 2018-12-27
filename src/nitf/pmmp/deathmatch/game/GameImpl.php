@@ -30,10 +30,12 @@ class GameImpl implements Game{
             $team_settings = $this->arena->getConfig()['team'][$team_name];
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
-                $player = $member->getPlayer();
-                $player->getInventory()->clearAll();
-                $player->setNameTag(str_replace('%NAME%', $player->getName(), $team_settings['name-tag']));
-                $player->setDisplayName(str_replace('%NAME%', $player->getName(), $team_settings['display-tag']));
+                if (Setting::getConfig()->get('auto-setting')){
+                    $player = $member->getPlayer();
+                    $player->getInventory()->clearAll();
+                    $player->setNameTag(str_replace('%NAME%', $player->getName(), $team_settings['name-tag']));
+                    $player->setDisplayName(str_replace('%NAME%', $player->getName(), $team_settings['display-tag']));
+                }
                 $member->respawn();
             }
         }
@@ -46,9 +48,11 @@ class GameImpl implements Game{
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
                 $player = $member->getPlayer();
-                $player->getInventory()->clearAll();
-                $player->setNameTag($player->getName());
-                $player->setDisplayName($player->getName());
+                if (Setting::getConfig()->get('auto-setting')){
+                    $player->getInventory()->clearAll();
+                    $player->setNameTag($player->getName());
+                    $player->setDisplayName($player->getName());
+                }
                 $member->spawnToLobby();
                 MemberRepository::unregister($player);
             }
