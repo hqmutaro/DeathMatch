@@ -1,5 +1,7 @@
 <?php
 
+namespace nitf\pmmp\deathmatch\command;
+
 use pocketmine\plugin\Plugin;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;

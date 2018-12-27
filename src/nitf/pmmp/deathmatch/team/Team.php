@@ -14,7 +14,7 @@ class Team{
     
     public function __construct(Arena $arena){
         $this->arena = $arena;
-        $this->teams = $arena->getConfig('team');
+        $this->teams = $arena->getConfig()->get('team');
     }
 
     public function getTeams(): array{

@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use nitf\pmmp\deathmatch\api\DeathMatch;
 use nitf\pmmp\deathmatch\api\DeathMatchAPI;
-use nitf\pmmp\deathmatch\command\DeathMatch;
+use nitf\pmmp\deathmatch\command\DeathMatchCommand;
 use nitf\pmmp\deathmatch\arena\Arena;
 use nitf\pmmp\deathmatch\event\DamageEvent;
 use nitf\pmmp\deathmatch\event\DeathEvent;
@@ -17,7 +17,7 @@ use nitf\pmmp\deathmatch\game\PrepareArenaTask;
 
 class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
 
-    private const VERSION = 'BETA-1.0';
+    private const VERSION = 'BETA-2.0';
     private const API_VERSION = '3.0.0';
 
     protected function onLoad(): void{
@@ -36,7 +36,7 @@ class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
         if(!is_dir($dir = $path . 'arenas/')){
             @mkdir($dir);
         }
-        TaskManager::repeatingTask(new PrepareArenaTask(), 20 * 1);
+        TaskManager::repeatingTask(new PrepareArenaTask(), 1);
         $this->getServer()->getCommandMap()->register('dmc', new DeathMatchCommand($this));
         $this->getServer()->getPluginManager()->registerEvents(new DamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new DeathEvent(), $this);

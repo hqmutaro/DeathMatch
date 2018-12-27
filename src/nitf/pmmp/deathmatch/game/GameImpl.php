@@ -25,9 +25,9 @@ class GameImpl implements Game{
 
     public function start(): void{
         $this->is_started = true;
-        TaskManager::repeatingTask(new TimeCountTask($this, $this->arena->getConfig()['time-limit']));
+        TaskManager::repeatingTask(new TimeCountTask($this, $this->arena->getConfig()->get('time-limit')), 1);
         foreach ($this->team->getTeams() as $team_name => $player_names){
-            $team_settings = $this->arena->getConfig()['team'][$team_name];
+            $team_settings = $this->arena->getConfig()->get('team')[$team_name];
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
                 if (Setting::getConfig()->get('auto-setting')){
@@ -44,7 +44,7 @@ class GameImpl implements Game{
     public function finish(): void{
         $this->is_started = false;
         foreach ($this->team->getTeams() as $team_name => $player_names){
-            $team_settings = $this->arena->getConfig()['team'][$team_name];
+            $team_settings = $this->arena->getConfig()->get('team')[$team_name];
             foreach ($player_names as $player_name){
                 $member = $this->team->getMember($team_name, $player_name);
                 $player = $member->getPlayer();

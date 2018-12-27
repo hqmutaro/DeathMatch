@@ -13,6 +13,6 @@ class PrepareArenaTask extends Task{
         if (empty($arena)){
             return;
         }
-        TaskManager::repeatingTask(new MatchingTask($arena), 20 * 1);
+        TaskManager::repeatingTask(new MatchingTask($arena), 1);
     }
 }

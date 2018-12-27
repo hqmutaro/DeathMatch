@@ -22,7 +22,7 @@ final class DeathMatch{
     private function __construct(){}
 
     public static function init(): void{
-        self::$instance = $this;
+        self::$instance = new DeathMatch();
     }
 
     public static function getAPI(DeathMatchAPI $plugin): ?self{

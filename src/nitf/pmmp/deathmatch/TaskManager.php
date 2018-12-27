@@ -15,10 +15,10 @@ class TaskManager{
     }
 
     public static function repeatingTask(Task $task, int $period): ?TaskHandler{
-        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, $period);
+        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, 20 * $period);
     }
 
     public static function delayedTask(Task $task, int $delay): ?TaskHandler{
-        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, $delay);
+        return self::$plugin->getScheduler()->scheduleRepeatingTask($task, 20 * $delay);
     }
 }
