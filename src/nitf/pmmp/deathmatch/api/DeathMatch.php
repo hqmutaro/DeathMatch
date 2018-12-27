@@ -34,11 +34,11 @@ final class DeathMatch{
     }
 
     public function getGames(): ?array{
-        $game_names = [];
+        $games = [];
         foreach (GameManager::getAll() as $game){
-            $game_names[] = key($game);
+            $games[] = $game;
         }
-        return $game_names;
+        return $games;
     }
 
     public function getGame(string $game_name): ?Game{
@@ -76,11 +76,11 @@ final class DeathMatch{
     }
 
     public function getArenas(): ?array{
-        $arena_names = [];
+        $arenas = [];
         foreach (ArenaManager::getAll() as $arena){
-            $arena_names[] = key($arena);
+            $arenas[] = $arena;
         }
-        return $arena_names;
+        return $arenas;
     }
 
     public function getArena(string $arena_name): ?Arena{
