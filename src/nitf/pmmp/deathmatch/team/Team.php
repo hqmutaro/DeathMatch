@@ -33,6 +33,15 @@ class Team{
         return $this->teams[$team_name];
     }
 
+    public function broadcastMessage(string $message): void{
+        foreach ($this->teams as $team_name => $member_names){
+            foreach ($member_names as $member_name){
+                $member = $this->getMember($team_name, $member_name);
+                $member->getPlayer()->sendMessage($message);
+            }
+        }
+    }
+
     public function removeMember(string $team_name, Member $member): void{
         unset($this->teams[$team_name][$member->getName()]);
     }

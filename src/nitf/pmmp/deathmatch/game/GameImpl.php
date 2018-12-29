@@ -73,7 +73,7 @@ class GameImpl implements Game{
             $rank = 0;
             foreach ($ranking as $team_name => $kill_count){
                 $rank++;
-                $this->server->broadcast("{$rank}位: {$team_name} Kills: {$kill_count}");
+                $this->team->broadcastMessage("{$rank}位: {$team_name} Kills: {$kill_count}");
             }
         }
         TeamManager::unregister($this->team);

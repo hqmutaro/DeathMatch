@@ -79,6 +79,10 @@ final class DeathMatch{
         return TeamManager::get($arena_name);
     }
 
+    public function broadcastMessageToTeam(Team $team, string $message): void{
+        $team->broadcastMessage($message);
+    }
+
     public function getArenas(): ?array{
         $arenas = [];
         foreach (ArenaManager::getAll() as $arena){
