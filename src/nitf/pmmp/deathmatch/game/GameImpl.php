@@ -59,8 +59,11 @@ class GameImpl implements Game{
                     $player->setNameTag($player->getName());
                     $player->setDisplayName($player->getName());
                 }
-                $kills[$team_name] += $member->getKill();
-                $deaths[$team_name] += $member->getDeath();
+                $kill = $member->getKill();
+                $death = $member->getDeath();
+                $kills[$team_name] += $kill;
+                $player->sendMessage("Your Kill: {$kill}");
+                $player->sendMessage("Your Death: {$death}");
                 $member->spawnToLobby();
                 MemberRepository::unregister($player);
             }
