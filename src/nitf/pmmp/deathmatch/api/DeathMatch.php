@@ -45,6 +45,10 @@ final class DeathMatch{
         return GameManager::get($game_name);
     }
 
+    public function getRanking(Game $game): array{
+        return $game->getRanking();
+    }
+
     public function matchingGame(?string $game_name): ?Game{
         return GameManager::matching($game_name);
     }
