@@ -39,7 +39,6 @@ class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
         }
         TaskManager::repeatingTask(new PrepareArenaTask(), 1);
         $this->getServer()->getCommandMap()->register('dmc', new DeathMatchCommand($this));
-        $events = []
         $this->getServer()->getPluginManager()->registerEvents(new DamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new DeathEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new BlockBreakEvent(), $this);
