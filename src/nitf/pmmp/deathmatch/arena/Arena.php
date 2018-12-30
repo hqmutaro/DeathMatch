@@ -54,6 +54,7 @@ class Arena{
                 'green' => $team_settings,
                 'yellow' => $team_settings,
             ],
+            'protect-world' => true
         ]);
         $this->setting = $arena_config;
     }

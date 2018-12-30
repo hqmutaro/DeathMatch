@@ -7,6 +7,7 @@ use pocketmine\level\Position;
 use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\team\TeamManager;
 use nitf\pmmp\deathmatch\game\GameManager;
+use nitf\pmmp\deathmatch\event\MemberRespawnEvent;
 
 class MemberImpl implements Member{
 
@@ -69,6 +70,7 @@ class MemberImpl implements Member{
     }
 
     public function respawn(): void{
+        (new MemberRespawnEvent($this))->call();
         $team_settings = $this->getTeamSetting();
         if (Setting::getConfig()->get('auto-setting')){
             $inventory = $this->player->getInventory();

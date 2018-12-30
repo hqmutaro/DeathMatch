@@ -6,6 +6,7 @@ use pocketmine\scheduler\Task;
 use nitf\pmmp\deathmatch\arena\Arena;
 use nitf\pmmp\deathmatch\arena\ArenaManager;
 use nitf\pmmp\deathmatch\config\Setting;
+use nitf\pmmp\deathmatch\event\MatchingEvent;
 
 class MatchingTask extends Task{
 
@@ -22,6 +23,7 @@ class MatchingTask extends Task{
         $this->count = Setting::getConfig()->get('matching-time');
         GameManager::register(new GameImpl($arena));
         $this->game = GameManager::get($this->arena->getName());
+        (new MatchingEvent($this->game, $this->count))->call();
     }
 
     public function onRun(int $tick): void{

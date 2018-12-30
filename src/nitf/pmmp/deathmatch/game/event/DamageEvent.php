@@ -1,6 +1,6 @@
 <?php
 
-namespace nitf\pmmp\deathmatch\event;
+namespace nitf\pmmp\deathmatch\game\event;
 
 use pocketmine\Player;
 use pocketmine\event\Listener;

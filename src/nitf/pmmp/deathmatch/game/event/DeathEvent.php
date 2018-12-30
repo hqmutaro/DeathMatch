@@ -1,12 +1,13 @@
 <?php
 
-namespace nitf\pmmp\deathmatch\event;
+namespace nitf\pmmp\deathmatch\game\event;
 
 use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use nitf\pmmp\deathmatch\member\MemberRepository;
+use nitf\pmmp\deathmatch\event\MemberFightEvent;
 
 class DeathEvent implements Listener{
 
@@ -29,6 +30,7 @@ class DeathEvent implements Listener{
         if ($member_damaged->getArena()->getName() !== $member_damager->getArena()->getName()){
             return;
         }
+        (new MemberFightEvent($this))->call();
         $member_damaged->addDeath();
         $member_damaged->respawn();
         $member_damager->addKill();

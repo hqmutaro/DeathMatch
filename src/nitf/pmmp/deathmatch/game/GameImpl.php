@@ -8,6 +8,8 @@ use nitf\pmmp\deathmatch\TaskManager;
 use nitf\pmmp\deathmatch\arena\Arena;
 use nitf\pmmp\deathmatch\team\Team;
 use nitf\pmmp\deathmatch\team\TeamManager;
+use nitf\pmmp\deathmatch\event\StartGameEvent;
+use nitf\pmmp\deathmatch\event\FinishGameEvent;
 
 class GameImpl implements Game{
 
@@ -29,6 +31,7 @@ class GameImpl implements Game{
 
     public function start(): void{
         $this->is_started = true;
+        (new StartGameEvent($this))->call();
         TaskManager::repeatingTask(new TimeCountTask($this, $this->arena->getConfig()->get('time-limit')), 1);
         foreach ($this->team->getTeams() as $team_name => $player_names){
             $team_settings = $this->arena->getConfig()->get('team')[$team_name];
@@ -47,6 +50,7 @@ class GameImpl implements Game{
 
     public function finish(): void{
         $this->is_started = false;
+        (new FinishGameEvent($this))->call();
         foreach ($this->team->getTeams() as $team_name => $player_names){
             $team_settings = $this->arena->getConfig()->get('team')[$team_name];
             $kills[$team_name] = 0;
