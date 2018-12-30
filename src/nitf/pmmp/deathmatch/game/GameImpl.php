@@ -8,6 +8,7 @@ use nitf\pmmp\deathmatch\TaskManager;
 use nitf\pmmp\deathmatch\arena\Arena;
 use nitf\pmmp\deathmatch\team\Team;
 use nitf\pmmp\deathmatch\team\TeamManager;
+use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\event\StartGameEvent;
 use nitf\pmmp\deathmatch\event\FinishGameEvent;
 

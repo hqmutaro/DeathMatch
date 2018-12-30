@@ -48,13 +48,13 @@ class Arena{
             'time-limit' => 200,
             'max-member' => 10,
             'mini-member' => 2,
+            'protect-world' => true,
             'team' => [
                 'red' => $team_settings,
                 'blue' => $team_settings,
                 'green' => $team_settings,
                 'yellow' => $team_settings,
             ],
-            'protect-world' => true
         ]);
         $this->setting = $arena_config;
     }

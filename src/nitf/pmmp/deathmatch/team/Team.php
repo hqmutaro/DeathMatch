@@ -25,7 +25,7 @@ class Team{
         $this->teams[$team_name] = $member->getName();
     }
 
-    public function getMember(string $team_name, stirng $name): ?Member{
+    public function getMember(string $team_name, string $name): ?Member{
         return $this->teams[$team_name][$name];
     }
 
