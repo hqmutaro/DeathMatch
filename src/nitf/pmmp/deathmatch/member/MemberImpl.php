@@ -109,7 +109,7 @@ class MemberImpl implements Member{
     }
 
     public function getTeamSetting(): array{
-        return $this->getArena()->getConfig('team')[$this->team_name];
+        return $this->getArena()->getConfig()->get('team')[$this->team_name];
     }
 
     public function getTeam(): string{
