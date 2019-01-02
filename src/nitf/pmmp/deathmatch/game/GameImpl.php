@@ -34,6 +34,7 @@ class GameImpl implements Game{
         $this->is_started = true;
         (new StartGameEvent($this))->call();
         TaskManager::repeatingTask(new TimeCountTask($this, $this->arena->getConfig()->get('time-limit')), 1);
+        $this->team->broadcastMessage(Messenger::get('start-game'));
         foreach ($this->team->getTeams() as $team_name => $player_names){
             $team_settings = $this->arena->getConfig()->get('team')[$team_name];
             foreach ($player_names as $player_name){
@@ -52,6 +53,7 @@ class GameImpl implements Game{
     public function finish(): void{
         $this->is_started = false;
         (new FinishGameEvent($this))->call();
+        $this->team->broadcastMessage(Messenger::get('finish-game'));
         foreach ($this->team->getTeams() as $team_name => $player_names){
             $team_settings = $this->arena->getConfig()->get('team')[$team_name];
             $kills[$team_name] = 0;
@@ -67,8 +69,8 @@ class GameImpl implements Game{
                 $kill = $member->getKill();
                 $death = $member->getDeath();
                 $kills[$team_name] += $kill;
-                $player->sendMessage("Your Kill: {$kill}");
-                $player->sendMessage("Your Death: {$death}");
+                $player->sendMessage(str_replace('%KILL%', $kill, Messenger::get('your-kill')));
+                $player->sendMessage(str_replace('%DEATH%', $kill, Messenger::get('your-death')));
                 $member->spawnToLobby();
                 MemberRepository::unregister($player);
             }
@@ -78,7 +80,12 @@ class GameImpl implements Game{
             $rank = 0;
             foreach ($ranking as $team_name => $kill_count){
                 $rank++;
-                $this->team->broadcastMessage("{$rank}位: {$team_name} Kills: {$kill_count}");
+                $needles = ['%RANK%' => $rank, '%TEAM%' => $team_name, '%KILL%' => $kill_count];
+                $message = Messenger::get('ranking');
+                foreach ($needles as $subject => $replace){
+                    $rewrited_message = str_replace($subject, $replace, $message);
+                }
+                $this->team->broadcastMessage($rewrited_message);
             }
         }
         TeamManager::unregister($this->team);

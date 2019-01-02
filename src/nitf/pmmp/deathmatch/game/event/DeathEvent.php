@@ -31,6 +31,7 @@ class DeathEvent implements Listener{
             return;
         }
         (new MemberFightEvent($damaged_member, $damager_member))->call();
+        
         $damaged_member->addDeath();
         $damaged_member->respawn();
         $damager_member->addKill();

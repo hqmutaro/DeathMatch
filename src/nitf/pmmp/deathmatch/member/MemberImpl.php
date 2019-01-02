@@ -4,6 +4,7 @@ namespace nitf\pmmp\deathmatch\member;
 
 use pocketmine\Player;
 use pocketmine\level\Position;
+use nitf\pmmp\deathmatch\Messenger;
 use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\team\TeamManager;
 use nitf\pmmp\deathmatch\game\GameManager;
@@ -30,19 +31,25 @@ class MemberImpl implements Member{
     public function entry(): void{
         $this->game = GameManager::matching();
         if (empty($this->game)){
-            $this->player->sendMessage("現在マッチング中のゲームが存在しません");
+            $this->player->sendMessage(Messenger::get('nothing-game'));
             MemberRepository::unregister($this->player);
             return;
         }
-        $team = TeamManager::get($game->getName());
+        $arena = $this->game->getName();
+        $team = TeamManager::get($arena);
         $this->team_name = $team->matching();
         if (empty($this->team_name)){
-            $this->player->sendMessage("現在マッチング中のチームが存在しません");
+            $this->player->sendMessage(Messenger::get('nothing-team'));
             MemberRepository::unregister($this->player);
             return;
         }
         (new MemberEntryEvent($this))->call();
-        $this->player->sendMessage("あなたは " . $game . " の " . $this->team_name . " に参加しました");
+        $needles = ["%GAME%" => $arena, "%TEAM%" => $this->team_name];
+        $message = Messenger::get('entry');
+        foreach ($needles as $subject => $replace){
+            $rewrited_message = str_replace($subject, $replace, $message);
+        }
+        $this->player->sendMessage($rewrited_message);
         $team->addMember($this->team_name, $this);
     }
 

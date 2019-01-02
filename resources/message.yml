@@ -1,3 +1,10 @@
 ---
-hello-yaml: "Hello YAML"
+nothing-game: "現在マッチング中のゲームが存在しません"
+nothing-team: "現在マッチング中のチームが存在しません"
+entry: "あなたは %GAME% の %TEAM% に参加しました"
+start-game: "ゲームが開始されました"
+finish-game: "ゲームが終了しました"
+your-kill: "Your Kill: %KILL%"
+your-death: "Your Death: %DEATH%"
+ranking: "%RANK%位 %TEAM% キル数: %KILL%"
 ...

@@ -21,7 +21,7 @@ class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
     private const VERSION = 'BETA-3.0';
     private const API_VERSION = '3.0.0';
 
-    protected function onLoad(): void{
+    public function onLoad(): void{
         Messenger::init($this);
         Arena::init($this);
         Setting::init($this);
@@ -29,7 +29,7 @@ class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
         DeathMatch::init();
     }
 
-    protected function onEnable(): void{
+    public function onEnable(): void{
         $path = $this->getDataFolder();
         if (!file_exists($path)){
             @mkdir($path);
@@ -37,7 +37,9 @@ class DeathMatchPlugin extends PluginBase implements DeathMatchAPI{
         if(!is_dir($dir = $path . 'arenas/')){
             @mkdir($dir);
         }
-        TaskManager::repeatingTask(new PrepareArenaTask(), 1);
+        if (Setting::getConfig()->get('auto-setting')){
+            TaskManager::repeatingTask(new PrepareArenaTask(), 1);
+        }
         $this->getServer()->getCommandMap()->register('dmc', new DeathMatchCommand($this));
         $this->getServer()->getPluginManager()->registerEvents(new DamageEvent(), $this);
         $this->getServer()->getPluginManager()->registerEvents(new DeathEvent(), $this);
