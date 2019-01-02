@@ -78,8 +78,8 @@ class GameImpl implements Game{
         $this->ranking = arsort($kills);
         if ($this->is_auto){
             $rank = 0;
-            foreach ($ranking as $team_name => $kill_count){
-                $rank++;
+            foreach ($this->ranking as $team_name => $kill_count){
+                ++$rank;
                 $needles = ['%RANK%' => $rank, '%TEAM%' => $team_name, '%KILL%' => $kill_count];
                 $message = Messenger::get('ranking');
                 foreach ($needles as $subject => $replace){
