@@ -17,22 +17,22 @@ class DeathEvent implements Listener{
         if (!MemberRepository::isMember($player)){
             return;
         }
-        $member_damaged = MemberRepository::get($player);
+        $damaged_member = MemberRepository::get($player);
         if (!$death_cause instanceof EntityDamageByEntityEvent){
-            $member_damaged->respawn();
+            $damaged_member->respawn();
             return;
         }
         $damager = $death_cause->getDamager();
         if (!$damager instanceof Player){
             return;
         }
-        $member_damager = MemberRepository::get($damager);
-        if ($member_damaged->getArena()->getName() !== $member_damager->getArena()->getName()){
+        $damager_member = MemberRepository::get($damager);
+        if ($damaged_member->getArena()->getName() !== $damager_member->getArena()->getName()){
             return;
         }
-        (new MemberFightEvent($this))->call();
-        $member_damaged->addDeath();
-        $member_damaged->respawn();
-        $member_damager->addKill();
+        (new MemberFightEvent($damaged_member, $damager_member))->call();
+        $damaged_member->addDeath();
+        $damaged_member->respawn();
+        $damager_member->addKill();
     }
 }
