@@ -107,4 +107,3 @@ class Team{
         return $this->arena;
     }
 }
-

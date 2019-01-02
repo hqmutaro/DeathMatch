@@ -23,6 +23,11 @@ class Arena{
 
     public function __construct(string $arena_name){
         $this->arena = $arena_name;
+        $this->createConfig();
+        TeamManager::register(new Team($this));
+    }
+
+    private function createConfig(): void{
         $team_settings = [
             'name-tag' => '%NAME%',
             'name-display' => '%NAME%',
@@ -39,11 +44,6 @@ class Arena{
                 'boots' => 301
             ]
         ];
-        $this->createConfig($team_settings);
-        TeamManager::register(new Team($this));
-    }
-
-    private function createConfig(array $team_settings): void{
         $arena_config = new Config(self::$plugin->getDataFolder() . 'arenas/' . $this->arena . '.yml', Config::YAML, [
             'time-limit' => 200,
             'max-member' => 10,

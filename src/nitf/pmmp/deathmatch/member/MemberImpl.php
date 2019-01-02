@@ -8,11 +8,9 @@ use nitf\pmmp\deathmatch\config\Setting;
 use nitf\pmmp\deathmatch\team\TeamManager;
 use nitf\pmmp\deathmatch\game\GameManager;
 use nitf\pmmp\deathmatch\event\MemberRespawnEvent;
+use nitf\pmmp\deathmatch\event\MemberEntryEvent;
 
 class MemberImpl implements Member{
-
-    /** @var Member $member */
-    private $member;
     
     /** @var Player $player */
     private $player;
@@ -26,7 +24,6 @@ class MemberImpl implements Member{
     private $death = 0;
 
     public function __construct(Player $player){
-        $this->member = $this;
         $this->player = $player;
     }
 
@@ -44,6 +41,7 @@ class MemberImpl implements Member{
             MemberRepository::unregister($this->player);
             return;
         }
+        (new MemberEntryEvent($this))->call();
         $this->player->sendMessage("あなたは " . $game . " の " . $this->team_name . " に参加しました");
         $team->addMember($this->team_name, $this);
     }
@@ -109,7 +107,7 @@ class MemberImpl implements Member{
     }
 
     public function getTeamSetting(): array{
-        return $this->getArena()->getConfig('team')[$this->team_name];
+        return $this->getArena()->getConfig()->get('team')[$this->team_name];
     }
 
     public function getTeam(): string{

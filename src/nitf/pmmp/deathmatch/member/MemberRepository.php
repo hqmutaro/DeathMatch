@@ -12,7 +12,7 @@ class MemberRepository{
         if (empty(self::$members[$player->getName()])){
             self::register($player);
         }
-        return self::$members[$player->getName()]->member;
+        return self::$members[$player->getName()];
     }
 
     public static function unregister(Player $player): void{
